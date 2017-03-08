@@ -1,0 +1,40 @@
+
+
+<ion-view>
+  <ion-content class="ion-subject-options" scroll="true" padding="false">
+    <div ui-view name="menuContent">
+
+      <div class="parent-div">
+        <div class="child-div child-div-group textoCentrado item-icon-right" ng-controller="GeneralCtrl">
+
+          <div class="welcome item item-divider">
+            <h1 class="textoCentrado item-text-wrap titulo-diego">Mensajes Privados</h1>
+            <i class="icon ion-ios-plus-outline" ng-click="consultarAulas()" ui-sref="mensajes.add"></i>
+            <hr />
+          </div>
+
+          <div class="welcome item item-divider">
+            <div ng-if="!isLoadingConversation() && conversations.length != 0" ng-repeat="conversacion in conversations">
+
+              <div class="item message-container-theme item-icon-right">
+                <div ui-sref="mensajes.view" ng-click="viewConversation({{conversacion.id}})">
+                  <h2>{{conversacion.user}}</h2>
+                </div>
+                  <i class="icon ion-trash-a" ng-click="deleteConversation({{conversacion.id}})"></i>
+              </div>
+
+            </div>
+
+            <div class="item-text-wrap" ng-if="!isLoadingConversation() && conversations.length == 0">
+              <strong>No tiene Mensajes Privados.</strong>
+            </div>
+
+            <div ng-hide="!isLoadingConversation()" themes="isLoadingConversation()"></div>
+          </div>
+          
+        </div>
+      </div>
+
+    </div>
+  </ion-content>
+</ion-view>

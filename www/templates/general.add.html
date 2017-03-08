@@ -1,0 +1,84 @@
+<ion-view>
+	<ion-content scroll="true" padding="false">
+	 	<div ui-view name="menuContent" class="ion-subject">
+
+			<div class="parent-div">
+				<div class="child-div textoCentrado">
+
+					<div class="list">
+						<div class="item ion-subject header-add-edit" style="padding: 10px;">
+							<h1 class="titulo-diego">Nuevo Tema</h1>
+						</div>
+						<div class="row responsive-sm" style="background-color: transparent;">
+						  <div class="col col-center" style="background-color: transparent;">
+							  <label class="item item-input item-stacked-label">
+							    <span class="input-label">Título</span>
+							    <input type="text" ng-model="nombre" placeholder="Indica un nombre">
+							  </label>
+						  </div>
+						  <div class="col" style="background-color: transparent;">
+							  <label class="item item-input item-stacked-label">
+							    <span class="input-label">Contenido</span>
+							    <textarea rows="4" cols="20" type="text" ng-model="contenido" placeholder="Escribe una breve descripción"></textarea>
+							  </label>
+						  </div>
+						</div>
+
+						  <div class="row" style="height: 60px; margin-top: 2%;">
+								<div class="col col-20" style="border-radius: 10px; background-color: #807b7b;">
+									<div class="ion-paperclip" style="font-size: 230%; margin-top: 0%; color: #fff;"></div>
+				      	</div>
+				      	<div class="col col-33"></div>
+						  	<div class="col col-50" style="max-width: 48%;">
+									<button class="button button-full button-balanced" style="margin: -3px 0px 0px -14px;" ng-disabled="!nombre" ng-click="crearTemaGeneral(nombre,contenido)">
+									  Crear
+									</button>
+						  	</div>
+						  </div>
+
+					</div>
+				</div>
+			</div>
+
+
+
+			<!-- <div class="parent-div">
+				<div class="child-div textoCentrado">
+
+					<div class="list">
+						<div class="item ion-subject header-add-edit">
+							<h1>Nuevo Tema</h1>
+						</div>
+		        
+						<div class="item ion-subject" style="border-color: transparent;" ng-controller="GeneralCtrl">
+						  <label class="item item-input item-stacked-label">
+						    <span class="input-label">Título</span>
+						    <input type="text" ng-model="nombre" placeholder="Indica un nombre">
+						  </label>
+
+						  <hr style="margin: 12px auto 12px auto; border: 1px solid #ffffff;"/>
+
+						  <label class="item item-input item-stacked-label">
+						    <span class="input-label">Contenido</span>
+						    <textarea rows="10" cols="20" type="text" ng-model="contenido" placeholder="Escribe una breve descripción"></textarea>
+						  </label>
+
+						  <div class="row" style="height: 60px;">
+								<div class="col col-20" style="border-radius: 10px; background-color: #807b7b;">
+									<div class="ion-paperclip" style="font-size: 230%; margin-top: 0%; color: #fff;"></div>
+				      	</div>
+				      	<div class="col col-33"></div>
+						  	<div class="col col-50">
+									<button class="button button-full button-balanced" style="margin: -3px 0px 0px -14px;" ng-disabled="!nombre" ng-click="crearTemaGeneral()">
+									  Crear
+									</button>
+						  	</div>
+						  </div>
+						</div>
+					</div>
+		    </div>
+			</div> -->
+
+		</div>
+	</ion-content>
+</ion-view>

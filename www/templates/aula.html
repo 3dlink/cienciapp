@@ -1,0 +1,40 @@
+<ion-view>
+	<ion-content scroll="true" padding="false">
+	 	<div ui-view name="menuContent" class="ion-subject-options" ng-controller="AulaCtrl">
+	 		<div class="item item-body ion-subject-options" style="padding: 0px 50px; border-width: 0px;">
+
+	      <ion-list class="general-menu textoCentrado">
+
+	        <hr class="hr-subjects-options" />
+		        <!-- <div ng-repeat="option in aula_options">
+				        <ion-item menu-close class="subject-option textoCentrado">
+				        	{{option.name}}
+				        </ion-item>
+				        <hr class="hr-subjects" />
+		        </div> -->
+	        <div ng-show="user_group == 2">
+		        <ion-item menu-close ng-show="user_group <= 2" class="subject-option textoCentrado" ng-click="listadoEstudiantes(aula_id)" ui-sref="estudiantes({ aulaID: aula_id })">
+		        	ESTUDIANTES
+		        </ion-item>
+		        <hr class="hr-subjects-options" />
+	        </div>
+
+		        <ion-item menu-close class="subject-option textoCentrado" ui-sref="general({ aulaID: aula_id })" ng-click="verForoGeneral()">
+		        	GENERAL
+		        </ion-item>
+		        <hr class="hr-subjects-options" />
+		        <ion-item menu-close class="subject-option textoCentrado" ui-sref="grupos({ aulaID: aula_id })" ng-click="verForoGrupal()">
+		        	GRUPOS
+		        </ion-item>
+		        <hr class="hr-subjects-options" />
+	      </ion-list>
+
+			  <ion-footer-bar class="ion-footer-theme footer-logo">
+			    <div style="width: 100%;">
+			      <img src="/img/logo_blanco.png">
+			    </div>
+			  </ion-footer-bar>
+	 		</div>
+		</div>
+	</ion-content>
+</ion-view>

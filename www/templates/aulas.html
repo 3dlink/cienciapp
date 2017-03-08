@@ -1,0 +1,41 @@
+<ion-view>
+	<ion-content scroll="true" padding="false" style="height: 100%;">
+	 	<div ui-view name="menuContent" class="ion-subject" ng-controller="AulasCtrl">
+			<div class="item item-body ion-subject" style="padding: 0px 50px; border-width: 0px;">
+
+	      <ion-list class="general-menu textoCentrado">
+	        <div>
+
+	        	<hr ng-show="!isLoadingClassrooms()" class="hr-subjects" />
+		        <div ng-show="!isLoadingClassrooms()" ng-repeat="aula in aulas">
+
+		        	<div ng-if="aula.active == 0">
+				        <ion-item menu-close class="subject textoCentrado deshabilitado">
+				        	{{aula.name}}
+				        </ion-item>
+			          <button class="button button-clear icon ion-android-checkmark-circle subject-activate" ng-click="activarSubject(aula.id, aula.id_api, aula.name)"> Activar</button>
+			          <hr ng-show="!isLoadingClassrooms()" class="hr-subjects-deshabilitado" />
+		        	</div>
+
+		        	<div ng-if="aula.active != 0">
+				        <ion-item menu-close class="subject textoCentrado habilitado" ui-sref="aula({ aulasID: aula.id })">
+				        	{{aula.name}}
+				        </ion-item>
+				        <hr ng-show="!isLoadingClassrooms()" class="hr-subjects" />
+		        	</div>
+		        </div>
+		        
+	        	<div classrooms="isLoadingClassrooms()"></div>
+
+	        </div>
+	      </ion-list>
+
+			  <ion-footer-bar class="ion-footer-theme footer-logo">
+			    <div style="width: 100%;">
+			      <img src="/img/logo_blanco.png">
+			    </div>
+			  </ion-footer-bar>
+			</div>
+		</div>
+	</ion-content>
+</ion-view>

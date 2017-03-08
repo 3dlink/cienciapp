@@ -1,0 +1,50 @@
+<ion-view>
+	<ion-content scroll="true" padding="false">
+	 	<div ui-view name="menuContent" class="ion-subject">
+	 		<div class="item item-body ion-subject" style="padding: 0px 50px; border-width: 0px;" ng-controller="ChatsCtrl">
+        <!-- <div class="list">
+          <div ng-repeat="chat in chats">
+            <a ng-if="datos_session.id === chat.destiny_id" class="item item-avatar" style="position: relative; margin-left: -30px; margin-right: 30px; background-color: #ffffff;">
+              <img src="img/jedi.png">
+              <h2 style="color: #000000; font-weight: bold;">{{chat.user_name}}</h2>
+              <p style="color: #000000;">{{chat.message}}</p>          
+            </a>
+
+            <a ng-if="datos_session.id === chat.source_id" class="item item-avatar" style="position: relative; margin-right: -30px; margin-left: 30px; background-color: green;">
+              <img src="img/sith.png">
+              <h2 style="color: #ffffff; font-weight: bold;">{{chat.user_name}}</h2>
+              <p style="color: #ffffff;">{{chat.message}}</p>
+              <p style="color: #ffffff;">ID fuente: {{chat.source_id}}</p>
+              <p style="color: #000000;">ID destino: {{chat.destiny_id}}</p>
+
+              <button class="button button-assertive" ng-click="chats.$remove(chat)">Delete Message</button>             
+            </a>
+          </div>
+        </div>
+
+        <form>
+          <div class="list">
+
+            <label class="item item-input item-select">
+              <div class="input-label">
+                Destinatario
+              </div>
+              <select ng-model="chat.id">
+                <option selected disabled>Selecciona uno</option>
+                <option ng-repeat="destinatario in destinatarios" ng-value="{{destinatario.id}}">{{destinatario.name}}</option>
+              </select>
+            </label>
+
+            <div class="item item-input-inset">
+              <label class="item-input-wrapper">
+                <input type="text" placeholder="Mensaje" ng-model="chat.message" >
+              </label>
+
+              <button class="button button-small button-positive" ng-click="sendChat(chat)">Enviar</button>
+            </div>
+          </div>
+        </form> -->
+	 		</div>
+		</div>
+	</ion-content>
+</ion-view>

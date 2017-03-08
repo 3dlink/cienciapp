@@ -1,0 +1,96 @@
+
+<ion-side-menus enable-menu-with-back-views="true">
+  <ion-pane ion-side-menu-content>
+    <ion-nav-bar class="bar-stable">
+
+      <ion-nav-buttons side="left">
+        <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
+        </button>
+
+        <div class="child-div child-logo-inside textoCentrado">
+          <!-- <div titulo="mostrar()"></div> -->
+          <div>
+            <img class="logo-inside" src="img/cienciapp_logo.png">
+          </div>
+
+        </div>
+
+      </ion-nav-buttons>
+    </ion-nav-bar>
+
+    <ion-nav-view name="menuContent"></ion-nav-view>
+  </ion-pane>
+
+  <ion-side-menu side="left" class="ion-side">
+    <ion-header-bar class="ion-side">
+      <div class="logo_header" menu-close></div>
+     <!-- < h1 class="title textoCentrado"><a><img src="/img/cienciapp_logo.png"></a></h1> -->
+      <!--<div class="item item-body" style="background-color: #dcdcdc;" menu-close>
+          <img width="10" height="10  0" class="full-image" src="img/cienciapp_logo.png" ui-sref="home">
+      </div>-->
+    </ion-header-bar>
+    <ion-content class="ion-content-menu">
+      <ion-list class="general-menu textoCentrado">
+          <hr class="hr-menu" />
+        <ion-item menu-close ui-sref="perfil" class="option-menu textoCentrado">
+          Perfil
+        </ion-item>
+          <hr class="hr-menu" />
+        <ion-item menu-close ui-sref="aulas" class="option-menu textoCentrado" ng-controller="AulasCtrl" ng-click="consultarAulas()">
+          Aulas
+        </ion-item>
+          <hr class="hr-menu" />
+        <ion-item menu-close ui-sref="mensajes" class="option-menu textoCentrado" ng-controller="MensajeCtrl" ng-click="allConversations()">
+          Mensajes Privados
+        </ion-item>
+          <hr class="hr-menu" />
+        <ion-item menu-close ui-sref="buscar" class="option-menu textoCentrado" ng-controller="BuscarCtrl" ng-click="buscarTemas()">
+          Buscar
+        </ion-item>
+          <hr class="hr-menu" />
+        <!-- <ion-item menu-close ui-sref="test_responsive" class="option-menu textoCentrado" ng-controller="TestResponsiveCtrl" ng-click="responsiveTest()">
+          Test Responsive
+        </ion-item>
+          <hr class="hr-menu" /> -->
+      </ion-list>
+    </ion-content>
+    <ion-footer-bar class="ion-footer-menu">
+      <div class="button-bar" ng-controller="LoginCtrl">
+        <!-- <button style="color: #ffffff; border: 2px solid #ffffff; border-radius: 14px; background-color: transparent; font-weight: bold;" class="button button-light" ui-sref="creditos" menu-close>Acerca</button> -->
+        <button style="color: #ffffff; border: 2px solid #ffffff; border-radius: 14px; background-color: transparent; font-weight: bold;" class="button button-light" ui-sref="login" menu-close>Cerrar sesión</button>
+      </div>
+    </ion-footer-bar>
+  </ion-side-menu>
+</ion-side-menus>
+
+<!--
+------------------------------------------------------------------------------------------------------------------------------
+-->
+
+<!--
+<ion-side-menus>
+  <ion-pane ion-side-menu-content>
+    <ion-nav-bar type="bar-positive"
+             back-button-type="button-icon"
+             back-button-icon="ion-ios7-arrow-back"></ion-nav-bar>
+    <ion-nav-view name="menuContent"></ion-nav-view>
+  </ion-pane> 
+
+  <ion-side-menu side="left">
+
+    <header class="bar bar-header bar-assertive">
+      <div class="title">Left Menu</div>
+    </header>
+
+    <ion-content has-header="true">
+      <ul class="list">
+        <a href="#/app/home" class="item">home</a>
+       
+        <a href="#/app/home/home1" class="item">home 1</a>
+                   
+        <a href="#/app/home/home2" class="item">home 2</a>
+      </ul>
+    </ion-content>
+  </ion-side-menu>
+</ion-side-menus>
+-->

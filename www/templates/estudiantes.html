@@ -1,0 +1,52 @@
+<ion-view>
+	<ion-content scroll="true" padding="false">
+	 	<div ui-view name="menuContent" class="ion-students" ng-controller="EstudiantesCtrl">
+
+			<div class="bar bar-header item-input-inset search-students">
+			  <label class="item-input-wrapper" >
+			    <i class="icon ion-ios-search placeholder-icon"></i>
+			    <input type="search" ng-model="searchKeyword" placeholder="Buscar estudiantes...">
+			  </label>
+			  <!-- <button class="button button-possitive">
+			    Cancel
+			  </button> -->
+			</div>
+
+	 		<div class="item item-body ion-students" style="padding: 0px 10%; border-width: 0px;" ng-if="estudiantesArray.length != 0">
+	 			<ion-list class="general-menu list-students textoCentrado">
+		 			<div>
+			 			<div class="list lastchild" ng-show="!isLoadingStudents()" ng-repeat="estudiante in estudiantesArray | filter: searchKeyword">
+
+			 				<div class="student-content">
+			 					<div class="avatar" ng-show="estudiante.photo == null" style="background-image:url('/img/ionic.png');"></div>
+			 					<div class="avatar" ng-show="estudiante.photo != null" style="background-image:url('/img/{{estudiante.photo}}');"></div>
+			 					<div class="description">
+			 						<div class="nombre"><h2 style="margin-top: 0%;">{{estudiante.first}} {{estudiante.last}}</h2></div>
+			 						<div class="email">{{estudiante.email}}</div>
+					      </div>
+			 				</div>
+			 			</div>
+
+		        <div class="item-text-wrap" ng-show="(estudiantesArray | filter:searchKeyword).length == 0" style="color: #ffffff;">
+		        	<strong>No se encontraron resultados...</strong>
+		        </div>
+
+			 			<div ng-hide="!isLoadingStudents()" students="isLoadingStudents()"></div>
+		 			</div>
+	 			</ion-list>
+
+			  <!-- <div class="container" style="color: #ffffff; background-color: #000000;">
+			  	<h2 style="color: #ffffff;">LISTA DE ESTUDIANTES</h2>
+			    <pre>
+			      {{ estudiantesArray }}
+			    </pre>
+			  </div> -->
+	 		</div>
+
+	 		<div class="item item-body" ng-if="estudiantesArray.length == 0">
+	 			<strong>Disculpe, ustéd no dispone de una lista de estudiantes.</strong>
+	 		</div>
+
+		</div>
+	</ion-content>
+</ion-view>

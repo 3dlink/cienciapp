@@ -1,0 +1,84 @@
+<ion-view>
+	<ion-content class="ion-subject-options" scroll="true" padding="false">
+	 	<div ui-view name="menuContent">
+
+			<div class="parent-div">
+				<div class="child-div child-div-group textoCentrado item-icon-right" ng-controller="GeneralCtrl">
+
+	        <div class="welcome item item-divider">
+	          <h1 class="textoCentrado item-text-wrap titulo-diego">Foro General</h1>
+	          <i class="icon ion-ios-plus-outline" ui-sref="general.add"></i>
+	          <hr />
+	        </div>
+
+	        <div class="welcome item item-divider" style="margin-bottom: 40px;">
+	          <!-- <h2>Id Aula: {{aula_id}}</h2> -->
+	          <!-- <h2 style="color: #ffffff">Id Usuario: {{datos_session.id}}</h2>
+	          <h2 style="color: #ffffff">Tipo usuario: {{user_group}}</h2>
+	          <h2 style="color: #ffffff">Grupo ID: {{grupo_id}}</h2> -->
+	          <div ng-if="!isLoadingThemes() && lista_temas_general.length != 0" ng-repeat="tema_general in lista_temas_general">
+
+							<div class="item group-container-theme item-icon-right" ng-class="{'theme-solved' : tema_general['Theme'].solved || make_theme_general_solved.id_theme == tema_general['Theme'].id}">
+			        	<div ui-sref="general.view" ng-click="consultarTemaGeneral(tema_general['Theme'].id)" ng-class="{'group-info-theme' : tema_general['Theme'].solved || make_theme_general_solved.id_theme == tema_general['Theme'].id}">
+				          <h2>{{tema_general['Theme'].tittle}}</h2>
+				          <h3 class="item-text-wrap">{{tema_general['Theme'].theme}}</h3>		
+				          <div class="row group-datetime-theme">
+									  <div class="col">{{tema_general['Theme'].date.split('-')[2]}}/{{tema_general['Theme'].date.split('-')[1]}}</div>
+									  <div class="col">{{tema_general['Theme'].hour.split(':')[0]}}:{{tema_general['Theme'].hour.split(':')[1]}}</div>
+									  <div class="col col-50"><b>{{count_answers_theme_general.id_theme === tema_general['Theme'].id ? count_answers_theme_general.total : tema_general['Answer'].length}} respuesta(s)</b></div>
+									</div>
+			        	</div>
+				          <i ng-if="datos_session.id == tema_general['User'].id || user_group == 2" class="icon ion-trash-a" on-delete-theme="itemOnDeleteThemeGeneral(tema_general['Theme'].id)"></i>
+						      <i ng-if="datos_session.id == tema_general['User'].id || user_group == 2" class="icon ion-edit" ui-sref="general.edit({ temaID: tema_general['Theme'].id })" ng-click="consultarTemaGeneral(tema_general['Theme'].id)"></i>
+			        </div>
+
+	          </div>
+
+	          <div class="item-text-wrap" ng-if="!isLoadingThemes() && lista_temas_general.length == 0">
+	          	<strong>Disculpe, no existen temas en este foro por ahora...</strong>
+	          </div>
+
+	          <div ng-hide="!isLoadingThemes()" themes="isLoadingThemes()"></div>
+
+	          <!-- <div ng-if="!isLoadingGroups()" ng-repeat="grupo in listado_grupos">
+
+	          	<div ng-if="user_group == 2">
+				        <div class="item item-text-wrap group-container item-icon-right" ng-if="listado_grupos.length > 0">
+				          {{grupo.name}}
+				          <i class="icon ion-trash-a" on-delete-group="itemOnDeleteGroup(grupo.id)"></i>
+				          <i class="icon ion-edit" ui-sref="grupos.edit({ grupoID: grupo.id })" ng-click="listadoEstudiantes(aula_id); consultarGrupo(grupo.id)"></i>
+				          <hr />
+				          {{grupo.integrantes}} integrante(s)
+				        </div>
+
+				        <div class="item item-text-wrap welcome" ng-if="listado_grupos.length == 0">
+				        	<strong>No posee grupos por ahora.</strong>
+				        </div>
+	          	</div>
+
+	          	<div ng-if="user_group == 3">
+				        <div class="item item-text-wrap group-container-student" ng-if="listado_grupos.length > 0" ui-sref="temas({ grupoID: grupo.id })" ng-click="detalleGrupo()">
+				          {{grupo.name}}
+				        </div>
+
+				        <div class="item item-text-wrap welcome" ng-if="listado_grupos.length == 0">
+				        	<strong>Disculpe, ustéd no está asociado a algún grupo por ahora.</strong>
+				        </div>
+	          	</div>
+	          </div>
+
+		        <div ng-hide="!isLoadingGroups()" groups="isLoadingGroups()"></div> -->
+
+				    <!-- <div class="container">
+				      <pre>
+				        {{ listado_grupos | json }}
+				      </pre>
+				    </div> -->
+	        </div>
+			    
+		    </div>
+			</div>
+
+		</div>
+	</ion-content>
+</ion-view>

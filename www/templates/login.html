@@ -1,0 +1,39 @@
+<div class="parent-div background-font1">
+  <div class="child-div child-logo textoCentrado">
+    <div>
+      <img class="logo" src="img/cienciapp_logo.png">
+    </div>
+  </div>
+
+  <div class="child-div child-form">
+      <div class="list child-div container-form" ng-controller="LoginCtrl">
+        <hr style="margin-bottom: 15%;" />
+
+        <label class="item item-input item-floating-label field-cedula">
+          <!-- <span class="input-label textoCentrado">Cédula</span> -->
+          <input type="text" ng-model="cedula" class="textoCentrado" placeholder="Indica tu cédula">
+        </label>
+
+        <label class="item item-input item-floating-label field-password">
+          <!-- <span class="input-label textoCentrado">Contraseña</span> -->
+          <input type="password" ng-model="password" ng-minlength="3" class="textoCentrado" placeholder="Indica tu contraseña">
+        </label>
+
+        <div class="loader">
+
+          <button class="button button-login button-block" ng-show="!isLoading()" ng-disabled="!cedula || !password" ng-click="enviar()">
+            Iniciar Sesión
+          </button>
+          <div loader="isLoading()"></div>
+
+          <hr style="margin-top: 15%;"  />
+        </div>
+      </div>
+  </div>
+</div>
+
+<!--<div class="container">
+  <pre>
+    {{ datos | json }}
+  </pre>
+</div>-->

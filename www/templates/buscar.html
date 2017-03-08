@@ -1,0 +1,66 @@
+<!-- <div class="card" style="margin-top: 100px; text-align: center;" ng-controller="BuscarCtrl">
+  <div class="item item-divider">
+    <h1>BUSCAR</h1>
+  </div>
+</div> -->
+
+<ion-view>
+	<ion-content scroll="true" padding="false">
+	 	<div ui-view name="menuContent" class="ion-students" ng-controller="BuscarCtrl">
+
+			<div class="bar bar-header item-input-inset search-students">
+			  <label class="item-input-wrapper" >
+			    <i class="icon ion-ios-search placeholder-icon"></i>
+			    <input type="search" ng-model="searchTheme" placeholder="Buscar temas...">
+			  </label>
+			</div>
+
+	 		<!-- <div class="item item-body ion-students" style="padding: 0px 20px; border-width: 0px;"> -->
+	        <div class="welcome item item-divider" style="margin-bottom: 40px;">
+	 			<!-- <ion-list class="general-menu list-students textoCentrado"> -->
+	        <div ng-if="!isLoadingThemes()" ng-repeat="tema in temas | filter:searchTheme">
+
+					<!-- 	<div class="item group-container-theme item-icon-right" ng-class="{'theme-solved' : tema['Theme'].solved || make_theme_solved.id_theme == tema['Theme'].id}">
+		        	<div ui-sref="buscar.view" ng-click="detalleTema(tema['Theme'].id)" ng-class="{'group-info-theme' : tema['Theme'].solved || make_theme_solved.id_theme == tema['Theme'].id}" style="width: 116%;">
+			          <h2>{{tema['Theme'].tittle}}</h2>
+			          <h3 class="item-text-wrap">{{tema['Theme'].theme}}</h3>
+		          	<hr />
+			          <div class="row group-datetime-theme">
+								  <div class="col">{{tema['Theme'].date.split('-')[2]}}/{{tema['Theme'].date.split('-')[1]}}</div>
+								  <div class="col">{{tema['Theme'].hour.split(':')[0]}}:{{tema['Theme'].hour.split(':')[1]}}</div>
+								  <div class="col col-50">{{count_answers_theme2.id_theme === tema['Theme'].id ? count_answers_theme2.total : tema['Answer'].length}} respuesta(s)</div>
+								</div>
+		        	</div>
+		        </div> -->
+
+
+
+							<div class="item group-container-theme item-icon-right" ng-class="{'theme-solved' : tema['Theme'].solved || make_theme_general_solved.id_theme == tema['Theme'].id}">
+			        	<div ui-sref="buscar.view" ng-click="detalleTema(tema['Theme'].id)" ng-class="{'group-info-theme' : tema['Theme'].solved || make_theme_general_solved.id_theme == tema['Theme'].id}">
+				          <h2>{{tema['Theme'].tittle}}</h2>
+				          <h3 class="item-text-wrap">{{tema['Theme'].theme}}</h3>		
+				          <div class="row group-datetime-theme">
+									  <div class="col">{{tema['Theme'].date.split('-')[2]}}/{{tema['Theme'].date.split('-')[1]}}</div>
+									  <div class="col">{{tema['Theme'].hour.split(':')[0]}}:{{tema['Theme'].hour.split(':')[1]}}</div>
+									  <div class="col col-50"><b>{{count_answers_theme_general.id_theme === tema['Theme'].id ? count_answers_theme_general.total : tema['Answer'].length}} respuesta(s)</b></div>
+									</div>
+			        	</div>
+			          <!-- <i ng-if="datos_session.id == tema['User'].id || user_group == 2" class="icon ion-trash-a" on-delete-theme="itemOnDeleteThemeGeneral(tema['Theme'].id)"></i>
+					      <i ng-if="datos_session.id == tema['User'].id || user_group == 2" class="icon ion-edit" ui-sref="general.edit({ temaID: tema['Theme'].id })" ng-click="consultarTemaGeneral(tema['Theme'].id)"></i> -->
+			        </div>
+
+
+
+
+	        </div>
+
+	        <div class="item-text-wrap" ng-show="(temas | filter:searchTheme).length == 0" style="color: #ffffff;">
+	        	<strong>No se encontraron resultados...</strong>
+	        </div>
+
+	        <div ng-hide="!isLoadingThemes()" themes="isLoadingThemes()"></div>
+        <!-- </ion-list> -->
+	 		</div>
+		</div>
+	</ion-content>
+</ion-view>

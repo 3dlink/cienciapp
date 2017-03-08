@@ -1,0 +1,30 @@
+<ion-view>
+	<ion-content scroll="true" padding="false" class="ion-content-home">
+	 	<div ui-view name="menuContent" ng-controller="HomeCtrl">
+
+			<div class="parent-div">
+				<div class="child-div child-div-home textoCentrado">
+					
+	        <div class="welcome item item-divider item-text-wrap">
+	          <h1>Bienvenido,<br><b>{{ resultado.first_name }}</b></h1>
+	        </div>
+
+	        <div class="item item-text-wrap">
+	          Ingresa en el menu para empezar
+	        </div>
+	        <form>
+	        	<input type="file">
+	        	<button type="submit"></button>
+	        </form>
+
+			    <!-- <div class="container">
+			      <pre>
+			        {{ resultado | json }}
+			      </pre>
+			    </div> -->
+			    <hr />
+		    </div>
+			</div>
+		</div>
+	</ion-content>
+</ion-view>

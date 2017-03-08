@@ -1,0 +1,63 @@
+<ion-view>
+	<ion-content class="ion-subject" scroll="true" padding="false">
+	 	<div ui-view name="menuContent">
+
+			<div class="parent-div">
+				<div class="child-div child-div-group textoCentrado item-icon-right" ng-controller="GruposCtrl">
+
+	        <div class="welcome item item-text-wrap">
+	          <h1 class="titulo-diego">Grupos</h1>
+	          <i class="icon ion-ios-plus-outline" ng-show="user_group == 2" ng-click="listadoEstudiantes(aula_id)" ui-sref="grupos.add"></i>
+	          <hr />
+	        </div>
+
+	        <div class="welcome item item-text-wrap">
+	          <!-- <h2>Id Aula: {{aula_id}}</h2>
+	          <h2>Id Usuario: {{datos_session.id}}</h2>
+	          <h2>Tipo usuario: {{user_group}}</h2>
+	          <h2># de grupos: {{listado_grupos.length}}</h2> -->
+
+	          <div ng-if="!isLoadingGroups() && listado_grupos.length != 0" ng-repeat="grupo in listado_grupos">
+
+	          	<div ng-if="user_group == 2">
+				        <div class="item item-text-wrap group-container item-icon-right" ng-if="listado_grupos.length != 0">
+				        	<div ui-sref="temas({ grupoID: grupo.id })" ng-click="detalleGrupo(grupo.id, grupo.name, aula_id)">
+				          	{{grupo.name}}
+					          <hr />
+					          {{grupo.integrantes}} integrante(s)				          	
+				        	</div>
+				          <i class="icon ion-trash-a" on-delete-group="itemOnDeleteGroup(grupo.id)"></i>
+				          <i class="icon ion-edit" ui-sref="grupos.edit({ grupoID: grupo.id })" ng-click="listadoEstudiantes(aula_id); consultarGrupo(grupo.id)"></i>
+				        </div>
+	          	</div>
+
+	          	<div ng-if="user_group == 3">
+				        <div class="item item-text-wrap group-container-student" ng-if="listado_grupos.length != 0" ui-sref="temas({ grupoID: grupo.id })" ng-click="detalleGrupo(grupo.id, grupo.name, aula_id)">
+				          {{grupo.name}}
+				        </div>
+	          	</div>
+	          </div>
+
+		        <div class="item-text-wrap" ng-if="!isLoadingGroups() && listado_grupos.length == 0 && user_group == 2">
+		        	<strong>Disculpe, ustéd no posee grupos por ahora.</strong>
+		        </div>
+
+	          <div class="item-text-wrap" ng-if="!isLoadingGroups() && listado_grupos.length == 0 && user_group == 3">
+	          	<strong>Disculpe, ustéd no está asociado a algún grupo por ahora.</strong>
+	          </div>
+
+		        <div ng-hide="!isLoadingGroups()" groups="isLoadingGroups()"></div>
+
+				    <!-- <div class="container">
+				      <pre>
+				        {{ listado_grupos | json }}
+				      </pre>
+				    </div> -->
+	        </div>
+			    
+		    </div>
+			</div>
+
+		</div>
+	</ion-content>
+</ion-view>

@@ -1,0 +1,49 @@
+<style type="text/css">
+
+	.item{
+		border-width: 0px;
+	}
+
+</style>
+
+<ion-view>
+	<ion-content scroll="true" padding="false">
+		<div ui-view name="menuContent" ng-controller="PerfilCtrl">
+			
+			<div class="parent-div textoCentrado">
+				<div class="child-div profile-div item item-body">
+
+				   <div id="perfil_contenedor" class="child-div" >
+				  	<div>
+				  		<img class="add-profile" ng-src="{{imgURI !== undefined ? imgURI : 'img/plus2.png'}}" ng-click="choosePhotoFirst()">
+				  	</div>
+
+				  	<!-- <div ng-if="imgURI === undefined">
+				  		<img class="add-profile" src="img/plus2.png" ng-click="choosePhotoFirst()">
+				  	</div> --> 
+
+						<div class="child-div">
+						  <div class="item" >
+						    <h1 style="font-size: 20px;">{{ resultado.first_name }} {{ resultado.last_name }}</h1>
+						  </div>
+
+							<hr />
+
+							<div class="item" >
+								{{ resultado.email }}
+							</div>
+						</div>
+				  </div> 
+
+			    <!--<div class="container">
+			      <pre>
+			        {{ resultado | json }}
+			      </pre>
+			    </div>-->
+
+
+				</div>
+			</div>
+		</div>
+	</ion-content>
+</ion-view>

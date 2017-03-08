@@ -1,0 +1,50 @@
+<ion-view>
+	<ion-content scroll="true" padding="false">
+	 	<div ui-view name="menuContent" class="ion-subject">
+
+			<div class="parent-div">
+				<div class="child-div textoCentrado">
+
+					<div class="list" style="padding-top: 5%;">
+						<div class="item ion-subject header-add-edit">
+							<h1 class="titulo-diego">Editar Tema</h1>
+							<!-- <strong>Id Aula: {{aula_id}}</strong> -->
+						</div>
+		        
+						<div ng-if="!isLoadingTheme()" style="border-color: transparent;" class="item ion-subject" ng-controller="TemasCtrl">
+							<!-- <input type="hidden" name="temaIdHidden" ng-model="id" value="{{tema.id}}" /> -->
+							<input type="hidden" name="temaClassroomIdHidden" ng-model="aula_id" value="{{tema_info['Theme'].classroom_id}}" />
+							<input type="hidden" name="temaGroupIdHidden" ng-model="grupo_id" value="{{tema_info['Theme'].grupo_id}}" />
+
+						  <label class="item item-input item-stacked-label">
+						    <span class="input-label">Titulo</span>
+						    <input type="text" ng-model="tema_info['Theme'].tittle" value="{{tema_info['Theme'].tittle}}"/>
+						  </label>
+
+						  <hr style="margin: 12px auto 12px auto; border: 1px solid #ffffff;"/>
+						  
+						  <label class="item item-input item-stacked-label">
+						    <span class="input-label">Contenido</span>
+						    <textarea rows="10" cols="20" type="text" ng-model="tema_info['Theme'].theme" value="{{tema_info['Theme'].theme}}"/></textarea>
+						  </label>
+							<button class="button button-full button-balanced" ng-click="editarTema()">
+							  Editar
+							</button>
+						</div>
+
+						<div ng-hide="!isLoadingTheme()" theme="isLoadingTheme()"></div>
+						
+					</div>
+
+					<!-- <div class="container" style="color: #ffffff; background-color: #000000;">
+						<p style="color: #ffffff;">TODOS LOS ESTUDIANTES</p>
+				    <pre>
+				      {{ estudiantesArray }}
+				    </pre>
+				  </div> -->
+		    </div>
+			</div>
+
+		</div>
+	</ion-content>
+</ion-view>

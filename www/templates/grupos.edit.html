@@ -1,0 +1,54 @@
+<ion-view>
+	<ion-content scroll="true" padding="false">
+	 	<div ui-view name="menuContent" class="ion-subject">
+
+			<div class="parent-div">
+				<div class="child-div textoCentrado">
+
+					<div class="list" style="padding-top: 5%;">
+						<div class="item ion-subject header-add-edit">
+							<h1 class="titulo-diego">Editar Grupo</h1>
+							<!-- <strong>Id Aula: {{aula_id}}</strong> -->
+						</div>
+
+						<div ng-if="!isLoadingGroup()" style="border-color: transparent;" class="item ion-subject" ng-controller="GruposCtrl">
+
+							<input type="hidden" name="grupoIdHidden" ng-model="grupo_id" value="{{grupo.id}}" />
+							<input type="hidden" name="grupoClassroomIdHidden" ng-model="aula_id" value="{{grupo.classroom_id}}" />
+
+						  <label class="item item-input item-stacked-label">
+						    <input type="text" ng-model="grupo.name" value="{{grupo.name}}">
+						  </label>
+
+						  <label class="item item-input item-stacked-label">
+						    <input type="text" ng-model="grupo.description" value="{{grupo.description}}">
+						  </label>
+							<button class="button button-full button-balanced" ng-click="editarGrupo()">
+							  EDITAR GRUPO
+							</button>
+						</div>
+
+						<div ng-hide="!isLoadingGroup()" group="isLoadingGroup()"></div>
+
+						<div ng-if="!isLoadingStudents()" ng-repeat="estudiante in estudiantesArray | orderBy : 'checked'" class="beta">
+							<ion-checkbox class="list-students-checkbox" ng-model="estudiante.checked" ng-checked="estudiante.checked" ng-value="{{estudiante.id}}">
+							  {{estudiante.first}} {{estudiante.last}}
+							</ion-checkbox>
+						</div>
+
+						<div ng-hide="!isLoadingStudents()" students="isLoadingStudents()"></div>
+
+					</div>
+
+					<!-- <div class="container" style="color: #ffffff; background-color: #000000;">
+						<p style="color: #ffffff;">TODOS LOS ESTUDIANTES</p>
+				    <pre>
+				      {{ estudiantesArray }}
+				    </pre>
+				  </div> -->
+		    </div>
+			</div>
+
+		</div>
+	</ion-content>
+</ion-view>

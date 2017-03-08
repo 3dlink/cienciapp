@@ -1,0 +1,195 @@
+<ion-view class="general">
+	
+		<div ui-view name="menuContent" ng-controller="GeneralCtrl" style="height: 100%;">
+			
+			<div class="parent-div" style="height: 100%;">
+				<div class="bar bar-header textoCentrado item header-theme-view">
+
+	        <div ng-if="!isLoadingTheme()" class="welcome item item-divider">
+	          <h1 class="item-text-wrap  titulo-diego titulo-tema">{{tema_info_general['Theme'].tittle}}</h1>
+
+	          <div class="question-container">
+		 					<div class="avatar" ng-show="tema_info_general['User'].photo == null" style="background-image:url('/img/ionic.png');"></div>
+		 					<div class="avatar" ng-show="tema_info_general['User'].photo != null" style="background-image:url('/img/{{tema_info_general['User'].photo}}');"></div>
+	          	<div class="question">
+	          		<p>{{tema_info_general['Theme'].theme}}</p>
+	          		<div class="author">
+	          			<span class="name">{{tema_info_general['User'].first_name}} {{tema_info_general['User'].last_name}}</span>
+	          			<span class="date">{{tema_info_general['Theme'].date.split('-')[2]}}/{{tema_info_general['Theme'].date.split('-')[1]}} {{tema_info_general['Theme'].hour.split(':')[0]}}:{{tema_info_general['Theme'].hour.split(':')[1]}}</span>
+	          		</div>
+	          	</div>
+	          </div>
+	        </div>
+
+	        <div ng-hide="!isLoadingTheme()" theme="isLoadingTheme()"></div>
+				</div>
+
+				<div class="textoCentrado item content-theme-view">
+					<ion-content scroll="true" padding="false">
+
+	          <div ng-if="!isLoadingAnswer() && tema_info_general['Answer'].length != 0" ng-repeat="(key, respuesta) in tema_info_general['Answer']">
+
+							<div class="item group-container-theme item-icon-right tema" ng-class="{'answer-correct' : respuesta.correct}">
+			        	<div ui-sref="general.view" ng-click="consultarTemaGeneral(tema_general['Theme'].id)" ng-class="{'group-info-theme' : tema_general['Theme'].solved || make_theme_general_solved.id_theme == tema_general['Theme'].id}">
+			        		<p class="respuesta-tema">{{respuesta.answer}}</p>	
+		          		<div class="row group-datetime-theme">
+				          	<div class="col col-50">{{respuesta.User.first_name}}</div>
+									  <div class="col">{{respuesta.date.split('-')[2]}}/{{respuesta.date.split('-')[1]}}</div>
+									  <div class="col">{{respuesta.hour.split(':')[0]}}:{{respuesta.hour.split(':')[1]}}</div>
+									</div>
+			        	</div>
+				          <i ng-if="user_group == 2" class="icon ion-android-checkmark-circle" ng-click="respuestaCorrectaGeneral(respuesta.id, respuesta.theme_id)"></i>
+			        </div>
+
+
+	          <!-- 	<div class="item group-container-theme" ng-class="{'answer-correct' : respuesta.correct}">
+								<button ng-if="user_group == 2" class="button button-balanced icon ion-android-checkmark-circle button-correct" ng-class="{'hide-correct-button' : respuesta.correct}" ng-click="respuestaCorrectaGeneral(respuesta.id, respuesta.theme_id)"> Correcta</button>
+			          <h3 class="item-text-wrap">{{respuesta.answer}}</h3>
+		          	<hr />
+			          <div class="row group-datetime-theme">
+			          	<div class="col col-50">{{respuesta.User.first_name}}</div>
+								  <div class="col">{{respuesta.date.split('-')[2]}}/{{respuesta.date.split('-')[1]}}</div>
+								  <div class="col">{{respuesta.hour.split(':')[0]}}:{{respuesta.hour.split(':')[1]}}</div>
+								</div>
+			        </div> -->
+	          </div>
+
+		        <div class="item-text-wrap" ng-if="!isLoadingAnswer() && tema_info_general['Answer'].length == 0">
+		        	<strong>No existen respuestas para este tema...</strong>
+		        </div>
+
+	          <div ng-hide="!isLoadingAnswer()" answer="isLoadingAnswer()"></div>
+
+          </ion-content>				
+				</div>
+
+			</div>
+
+			  <ion-footer-bar class="ion-footer-theme">
+			    <div style="width: 100%;" ng-controller="GeneralCtrl">
+
+
+			      <div class="row">
+			      	<div class="col col-10" style="border-radius: 10px; background-color: #807b7b;">
+								<div class="ion-paperclip paperclip-css"></div>
+			      	</div>
+			      	<div class="col" style="background-color: transparent; margin: auto 2%; border: 1px solid #000; border-radius: 8px;">
+			      		<input type="hidden" name="tema_id" ng-model="tema_info_general['Theme'].id" value="{{tema_info_general['Theme'].id}}">
+								<input type="text" style="width: 100%;" ng-model="tema_answer" placeholder="Escribe una respuesta...">
+			      	</div>
+			      	<div class="col col-10" style="border-radius: 10px; background-color: #33cd5f;" ng-click="crearRespuestaGeneral()">
+			      		<div class="ion-chevron-up chevron-up-css" ></div>
+			      	</div>
+			      </div>
+
+
+			    </div>
+			  </ion-footer-bar>
+			<!-- <div class="parent-div" >
+				<div class="child-div textoCentrado item">
+
+          <div ng-if="!isLoadingAnswer()" ng-repeat="(key, respuesta) in tema_info['Answer']">
+		        <div class="item group-container-theme">
+							<button ng-if="user_group == 2" class="button button-balanced icon ion-android-checkmark-circle"> Correcta</button>
+
+		          <h3 class="item-text-wrap">{{respuesta.answer}}</h3>
+	          	<hr />
+		          <div class="row group-datetime-theme">
+		          	<div class="col col-50">{{respuesta.User.first_name}}</div>
+							  <div class="col">{{respuesta.date.split('-')[2]}}/{{respuesta.date.split('-')[1]}}</div>
+							  <div class="col">{{respuesta.hour.split(':')[0]}}:{{respuesta.hour.split(':')[1]}}</div>
+							</div>
+		        </div>
+          </div>
+          <div ng-hide="!isLoadingAnswer()" answer="isLoadingAnswer()"></div>				
+				</div>
+			</div> -->
+
+		</div>
+	
+
+
+	
+		<!-- <div ui-view name="menuContent" ng-controller="TemasCtrl">
+			
+			<div class="bar bar-header" style="position: relative; height: auto; min-height: 100% !important;">
+				<div class="textoCentrado" style="width: 100%;">
+
+	        <div ng-if="!isLoadingTheme()" class="welcome item item-divider">
+	          <h3 class="item-text-wrap" style="color:#000000;">{{tema_info['Theme'].tittle}}</h3>
+
+	          <hr />
+	          <div class="row">
+
+	          	<div class="col" style="position: relative;">
+	          		<img height="60" style="position: absolute; top: 0; bottom: 0; right: 0; left: 0; margin: auto;" src="img/ionic.png">
+	          	</div>
+	          	<div class="col col-75 item-text-wrap">
+		          	<h2>{{tema_info['Theme'].theme}}</h2>
+		          	<h2><b>{{tema_info['User'].first_name}}</b> {{tema_info['Theme'].date.split('-')[2]}}/{{tema_info['Theme'].date.split('-')[1]}} {{tema_info['Theme'].hour.split(':')[0]}}:{{tema_info['Theme'].hour.split(':')[1]}}</h2>
+	          	</div>
+
+	          </div>
+		        <hr />
+	        </div>
+
+	        <div ng-hide="!isLoadingTheme()" theme="isLoadingTheme()"></div>
+
+				</div>
+			</div>
+
+			<div>
+				<ion-content scroll="true" padding="false" style="top: 25%;">
+
+						<div class="textoCentrado">
+
+		          <div ng-if="!isLoadingAnswer()" ng-repeat="(key, respuesta) in tema_info['Answer']">
+				        <div class="item group-container-theme">
+				        	
+
+				          <h3 class="item-text-wrap">{{respuesta.answer}}</h3>
+			          	<hr />
+				          <div class="row group-datetime-theme">
+				          	<div class="col col-50">{{respuesta.User.first_name}}</div>
+									  <div class="col">{{respuesta.date.split('-')[2]}}/{{respuesta.date.split('-')[1]}}</div>
+									  <div class="col">{{respuesta.hour.split(':')[0]}}:{{respuesta.hour.split(':')[1]}}</div>
+									</div>
+				        	
+
+				        </div>
+		          </div>
+		          <div ng-hide="!isLoadingAnswer()" answer="isLoadingAnswer()"></div>
+					
+						</div>
+				</ion-content>
+			</div>
+
+
+		  <ion-footer-bar class="ion-footer-theme">
+		    <div style="width: 100%;" ng-controller="TemasCtrl">
+
+
+		      <div class="row">
+		      	<div class="col col-10" style="border-radius: 10px; background-color: #807b7b;">
+							<div class="ion-paperclip" style="font-size: 230%; margin-top: 0%; margin-left: 26%; color: #fff;"></div>
+		      	</div>
+		      	<div class="col" style="background-color: transparent; margin: auto 2%; border: 1px solid #000; border-radius: 8px;">
+		      		<input type="hidden" name="tema_id" ng-model="tema_info['Theme'].id" value="{{tema_info['Theme'].id}}">
+							<input type="text" style="width: 100%;" ng-model="tema_answer" placeholder="Escribe una respuesta...">
+		      	</div>
+		      	<div class="col col-10" style="border-radius: 10px; background-color: #33cd5f;" ng-click="crearRespuesta()">
+		      		<div class="ion-chevron-up" style="font-size: 170%; margin-top: 16%; margin-left: 5%; color: #fff;"></div>
+		      	</div>
+		      </div>
+
+
+		    </div>
+		  </ion-footer-bar>
+
+		</div> -->
+	
+
+
+
+
+</ion-view>
