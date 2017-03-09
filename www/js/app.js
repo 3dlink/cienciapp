@@ -23,17 +23,6 @@ angular.module('starter', ['ionic', 'ngCordova', 'ionic.service.core', 'ionic.se
     if(window.StatusBar) {
       StatusBar.styleDefault();
     }
-
-    /*-----------------------------------------*/
-      var notificationOpenedCallback = function(jsonData) {
-        alert('notificationOpenedCallback: ' + JSON.stringify(jsonData));
-      };
-
-      window.plugins.OneSignal
-        .startInit("077f995c-6ab2-40c2-bb28-6b03c0421ca3", "1060289811292")
-        .handleNotificationOpened(notificationOpenedCallback)
-        .endInit();
-    /*-----------------------------------------*/
   });
 
   // Disable BACK button on home
