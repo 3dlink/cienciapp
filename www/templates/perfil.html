@@ -4,6 +4,14 @@
 		border-width: 0px;
 	}
 
+	.add-profile{
+		width: 160px;
+		height: 160px;
+		background-repeat: no-repeat;
+		background-position: 50%;
+		background-size: cover;
+	}
+
 </style>
 
 <ion-view>
@@ -15,12 +23,10 @@
 
 				   <div id="perfil_contenedor" class="child-div" >
 				  	<div>
-				  		<img class="add-profile" ng-src="{{imgURI !== undefined ? imgURI : 'img/plus2.png'}}" ng-click="choosePhotoFirst()">
+				  		<div ng-if="resultado.photo == null" class="add-profile" ng-click="choosePhotoFirst()" style="background-image:url('http://www.3dlinkweb.com/cienciapp/img/plus2.png');"></div>
+				  		<div ng-if="(resultado.photo != null) && user_photo_change!=1" class="add-profile" ng-click="choosePhotoFirst()" style="background-image:url('http://www.3dlinkweb.com/cienciapp/files/{{resultado.photo}}');"></div>
+				  		<div ng-if="(resultado.photo != null) && user_photo_change==1" class="add-profile" ng-click="choosePhotoFirst()" style="background-image:url('http://www.3dlinkweb.com/cienciapp/files/{{user_photo}}');"></div>
 				  	</div>
-
-				  	<!-- <div ng-if="imgURI === undefined">
-				  		<img class="add-profile" src="img/plus2.png" ng-click="choosePhotoFirst()">
-				  	</div> --> 
 
 						<div class="child-div">
 						  <div class="item" >

@@ -1,16 +1,16 @@
 <ion-view>
 	<ion-content scroll="true" padding="false">
 	 	<div ui-view name="menuContent" class="ion-students" ng-controller="EstudiantesCtrl">
-
-			<div class="bar bar-header item-input-inset search-students">
-			  <label class="item-input-wrapper" >
-			    <i class="icon ion-ios-search placeholder-icon"></i>
-			    <input type="search" ng-model="searchKeyword" placeholder="Buscar estudiantes...">
-			  </label>
-			  <!-- <button class="button button-possitive">
-			    Cancel
-			  </button> -->
-			</div>
+      <div class="welcome item item-divider azul">
+        <h1 class="textoCentrado item-text-wrap titulo-diego" style="text-align:center;width:100%;">Estudiantes</h1>
+        <hr style="margin: 0% 5% 0% 5%;border: 1px solid #ffffff;"/>
+				<div class="bar bar-header item-input-inset search-students search-theme" style="margin-top: 0px;">
+				  <label class="item-input-wrapper" >
+				    <i class="icon ion-ios-search placeholder-icon"></i>
+				    <input type="search" ng-model="searchKeyword" placeholder="Buscar...">
+				  </label>
+				</div>
+      </div>
 
 	 		<div class="item item-body ion-students" style="padding: 0px 10%; border-width: 0px;" ng-if="estudiantesArray.length != 0">
 	 			<ion-list class="general-menu list-students textoCentrado">
@@ -18,8 +18,8 @@
 			 			<div class="list lastchild" ng-show="!isLoadingStudents()" ng-repeat="estudiante in estudiantesArray | filter: searchKeyword">
 
 			 				<div class="student-content">
-			 					<div class="avatar" ng-show="estudiante.photo == null" style="background-image:url('/img/ionic.png');"></div>
-			 					<div class="avatar" ng-show="estudiante.photo != null" style="background-image:url('/img/{{estudiante.photo}}');"></div>
+			 					<div class="avatar" ng-show="estudiante.photo == null" style="background-image:url('http://www.3dlinkweb.com/cienciapp/img/avatar.png');"></div>
+			 					<div class="avatar" ng-show="estudiante.photo != null" style="background-image:url('http://www.3dlinkweb.com/cienciapp/files/{{estudiante.photo}}');"></div>
 			 					<div class="description">
 			 						<div class="nombre"><h2 style="margin-top: 0%;">{{estudiante.first}} {{estudiante.last}}</h2></div>
 			 						<div class="email">{{estudiante.email}}</div>
@@ -27,7 +27,7 @@
 			 				</div>
 			 			</div>
 
-		        <div class="item-text-wrap" ng-show="(estudiantesArray | filter:searchKeyword).length == 0" style="color: #ffffff;">
+		        <div class="item-text-wrap" ng-show="(estudiantesArray | filter:searchKeyword).length == 0" style="color: black;">
 		        	<strong>No se encontraron resultados...</strong>
 		        </div>
 

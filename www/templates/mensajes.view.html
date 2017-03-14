@@ -3,18 +3,24 @@
 .ion-subject-options {
   background-color: white !important;
 }
-
+.titulo-brito {
+    font-size: 18px;
+}
+.m-container{
+  display: table;
+  width: 100%;
+}
 </style>
 <ion-view>
-  <ion-content class="ion-subject-options" scroll="true" padding="false">
+  <ion-content class="ion-subject-options" scroll="true" padding="false" ng-controller="MensajeCtrl" ng-style="{height: ((iframeHeight)-110) + 'px'}" id="autoscroll">
     <div ui-view name="menuContent">
 
       <div class="parent-div">
-        <div class="child-div child-div-group textoCentrado item-icon-right" ng-controller="MensajeCtrl">
+        <div ng-if="!isLoadingMessages()" class="textoCentrado scroll">
 
           <div class="welcome item item-divider">
-            <h1 class="textoCentrado item-text-wrap titulo-diego" style="color:black;">{{conversacion.other}}</h1>
-            <hr />
+            <h1 class="textoCentrado item-text-wrap titulo-brito" style="color:black;">{{conversacion.other}}</h1>
+            <hr style="margin-bottom:0;"/>
           </div>
 
           <div class="m-container" ng-repeat="mensaje in conversacion.messages">
@@ -23,21 +29,27 @@
           			{{mensaje.created.split(' ')[0].split('-')[2]}}/{{mensaje.created.split(' ')[0].split('-')[1]}}<br>
           			{{mensaje.created.split(' ')[1].split(':')[0]}}:{{mensaje.created.split(' ')[1].split(':')[1]}}
           		</span>
+              <p>
           		{{mensaje.message}}
+              </p>
           	</div>
           	<div class="m-mine m-nube" ng-show="mensaje.sender_id == conversacion.mine">
           		<span class="m-horas-mine">
           			{{mensaje.created.split(' ')[0].split('-')[2]}}/{{mensaje.created.split(' ')[0].split('-')[1]}}<br>
           			{{mensaje.created.split(' ')[1].split(':')[0]}}:{{mensaje.created.split(' ')[1].split(':')[1]}}
           		</span>
-          		{{mensaje.message}}
+              <p>
+              {{mensaje.message}}
+              </p>
           	</div>
+            <div ng-hide="!isLoadingMessages()" mensajes="isLoadingMessages()"></div>
           </div>
           
         </div>
       </div>
 
     </div>
+    <div id="down"></div>
   </ion-content>
 
 			  <ion-footer-bar class="ion-footer-theme">

@@ -27,9 +27,27 @@
 						    <span class="input-label">Contenido</span>
 						    <textarea rows="10" cols="20" type="text" ng-model="tema_info_general['Theme'].theme" value="{{tema_info_general['Theme'].theme}}"/></textarea>
 						  </label>
-							<button class="button button-full button-balanced" ng-click="editarTemaGeneral()">
+
+
+						  <div class="row" style="height: 50px; margin-top: 2%;">
+								<div class="col col-20">
+					      	<label class="fileContainer">
+					      		<i class="ion-paperclip"></i>
+										<input name="file" type="file" ng-model="file_name" onchange="angular.element(this).scope().uploadFile(this.files)">
+									</label>
+									<span ng-if="subio == 1" style="color:white;font-size:12px;">Archivo Cargado</span>
+				      	</div>
+				      	<div class="col col-33"></div>
+						  	<div class="col col-50" style="max-width: 48%;">
+									<button class="button button-full button-balanced" style="margin: -3px 0px 0px -14px;" ng-click="editarTemaGeneral(tema_info_general['Theme'].tittle,tema_info_general['Theme'].theme,file_name)">
+									  Editar
+									</button>
+						  	</div>
+						  </div>
+
+							<!-- <button class="button button-full button-balanced" ng-click="editarTemaGeneral()">
 							  Editar
-							</button>
+							</button> -->
 						</div>
 
 						<div ng-hide="!isLoadingThemeEdit()" themeEdit="isLoadingThemeEdit()"></div>

@@ -20,7 +20,7 @@
                 <div ui-sref="mensajes.view" ng-click="viewConversation({{conversacion.id}})">
                   <h2>{{conversacion.user}}</h2>
                 </div>
-                  <i class="icon ion-trash-a" ng-click="deleteConversation({{conversacion.id}})"></i>
+                  <i class="icon ion-trash-a" on-delete-group="itemOnDeleteMessage(conversacion.id)"></i>
               </div>
 
             </div>
@@ -29,7 +29,7 @@
               <strong>No tiene Mensajes Privados.</strong>
             </div>
 
-            <div ng-hide="!isLoadingConversation()" themes="isLoadingConversation()"></div>
+            <div ng-hide="!isLoadingConversation()" conversation="isLoadingConversation()"></div>
           </div>
           
         </div>

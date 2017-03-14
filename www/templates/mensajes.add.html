@@ -12,9 +12,12 @@
 						<div class="row responsive-sm" style="background-color: transparent;">
 						  <form>
 			          <div class="list">
-		              <select id="aulas" class="select-add" ng-change="consultarEstudiantes(aula.id)" ng-disabled="!aulas2" ng-model="aula.id" ng-options="value.id as value.name for (key, value) in aulas2">
+		              <select ng-show="user_group == 2" id="aulas" class="select-add" ng-change="consultarEstudiantes(aula.id)" ng-disabled="!aulas2" ng-model="aula.id" ng-options="value.id as value.name for (key, value) in aulas2">
 		                <option value="" ng-selected="selected" disabled>Selecciona un aula</option>
 		              </select>    
+		              <select ng-show="user_group == 3" id="aulas" class="select-add" ng-change="consultarDestinatarios(aula.id)" ng-disabled="!aulas2" ng-model="aula.id" ng-options="value.id as value.name for (key, value) in aulas2">
+		                <option value="" ng-selected="selected" disabled>Selecciona un aula</option>
+		              </select>   
 		              <select id="reciver" class="select-add" ng-disabled="!aula.id" ng-model="reciver.id" ng-options="value2.id as value2.first for (key2, value2) in destinatarios">
 		                <option value="" ng-selected="selected" disabled>Selecciona un destinatario</option>
 		              </select>
