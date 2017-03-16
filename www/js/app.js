@@ -782,7 +782,6 @@ angular.module('starter', ['ionic', 'ngCordova', 'ionic.service.core', 'ionic.se
     });
 
     request.success(function(data){
-      //alert("PASO EL REQUEST");
 
       if(data[0].id === undefined){
         alert("ERROR: " + data);
@@ -1047,15 +1046,6 @@ angular.module('starter', ['ionic', 'ngCordova', 'ionic.service.core', 'ionic.se
           }
         ]
     });
-
-    // ngDialog.open({
-    //   template: 'templates/modal-default.html',
-    //   controller: 'GruposCtrl',
-    //   closeByEscape: true,
-    //   data: {
-    //     id_grupo: id
-    //   }
-    // });
   };
 
   $scope.closeModalDelete = function () {
@@ -1507,6 +1497,8 @@ angular.module('starter', ['ionic', 'ngCordova', 'ionic.service.core', 'ionic.se
         $scope.tema_answer = '';
         // $rootScope.answers_output.push(datos_answer);
         $scope.consultarTemaGeneral(datos_answer.theme_id);
+        
+        $scope.file_name = '';
         // $rootScope.answers_output = [];
         // angular.forEach(data, function(value, key) {
         //   // console.log(value['Theme']);
@@ -1524,35 +1516,41 @@ angular.module('starter', ['ionic', 'ngCordova', 'ionic.service.core', 'ionic.se
     var datos_answer_correct = {
       id: idRespuesta,
     };
-    // console.log(datos_answer_correct);
 
-    var request = $http({
-      method : "post",
-      url : "http://www.3dlinkweb.com/cienciapp/answers/makeCorrect",
-      data : datos_answer_correct
+    $ionicPopup.confirm({
+        title: 'Respuesta Correcta',
+        template: '¿Está seguro que esta es la respuesta correcta?',
+        buttons: [
+          {
+            text: 'Cancelar',
+            type: 'button-dark',
+          },
+          {
+            text: '<b>Confirmar</b>',
+            type: 'button-positive',
+            onTap: function(e) {
+              var request = $http({
+                method : "post",
+                url : "http://www.3dlinkweb.com/cienciapp/answers/makeCorrect",
+                data : datos_answer_correct
+              });
+
+              request.success(function(data){
+
+                if(data[0] === undefined){
+                  alert("ERROR: " + data);
+                }else{
+                  $rootScope.make_theme_general_solved = {
+                    id_theme: idTema
+                  };
+                  $scope.consultarTemaGeneral(idTema);
+                }
+              });
+            }
+          }
+        ]
     });
 
-    request.success(function(data){
-
-      if(data[0] === undefined){
-        alert("ERROR: " + data);
-        //$rootScope.resultado = data;
-      }else{
-        // console.log(data);
-        $rootScope.make_theme_general_solved = {
-          id_theme: idTema
-        };
-        $scope.consultarTemaGeneral(idTema);
-        // $rootScope.answers_output = [];
-        // angular.forEach(data, function(value, key) {
-        //   // console.log(value['Theme']);
-        //   output.push(value['Theme']);
-        // });
-
-        // $scope.listarTemas();
-        // $location.path('/app/temas/'+$stateParams.grupoID);
-      }
-    });
   };
 })
 
@@ -1799,6 +1797,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'ionic.service.core', 'ionic.se
       }else{
         $scope.tema_answer_group = '';
         $scope.consultarTema(datos_answer_group.theme_id);
+        $scope.file_name = '';
       }
     });
   };
@@ -1808,35 +1807,43 @@ angular.module('starter', ['ionic', 'ngCordova', 'ionic.service.core', 'ionic.se
     var datos_answer_correct = {
       id: idRespuesta,
     };
-    // console.log(datos_answer_correct);
 
-    var request = $http({
-      method : "post",
-      url : "http://www.3dlinkweb.com/cienciapp/answers/makeCorrect",
-      data : datos_answer_correct
+
+    $ionicPopup.confirm({
+        title: 'Respuesta Correcta',
+        template: '¿Está seguro que esta es la respuesta correcta?',
+        buttons: [
+          {
+            text: 'Cancelar',
+            type: 'button-dark',
+          },
+          {
+            text: '<b>Confirmar</b>',
+            type: 'button-positive',
+            onTap: function(e) {
+              
+              var request = $http({
+                method : "post",
+                url : "http://www.3dlinkweb.com/cienciapp/answers/makeCorrect",
+                data : datos_answer_correct
+              });
+
+              request.success(function(data){
+
+                if(data[0] === undefined){
+                  alert("ERROR: " + data);
+                }else{
+                  $rootScope.make_theme_solved = {
+                    id_theme: idTema
+                  };
+                  $scope.consultarTema(idTema);
+                }
+              });
+            }
+          }
+        ]
     });
 
-    request.success(function(data){
-
-      if(data[0] === undefined){
-        alert("ERROR: " + data);
-        //$rootScope.resultado = data;
-      }else{
-        // console.log(data);
-        $rootScope.make_theme_solved = {
-          id_theme: idTema
-        };
-        $scope.consultarTema(idTema);
-        // $rootScope.answers_output = [];
-        // angular.forEach(data, function(value, key) {
-        //   // console.log(value['Theme']);
-        //   output.push(value['Theme']);
-        // });
-
-        // $scope.listarTemas();
-        // $location.path('/app/temas/'+$stateParams.grupoID);
-      }
-    });
   };
 
 })
@@ -2353,6 +2360,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'ionic.service.core', 'ionic.se
     });
 
     request.success(function(data){
+      console.log(data);
       $rootScope.conversations = data;
     });
   };

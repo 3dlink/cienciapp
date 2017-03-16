@@ -15,8 +15,7 @@
 
           <div class="welcome item item-divider">
             <div ng-if="!isLoadingConversation() && conversations.length != 0" ng-repeat="conversacion in conversations">
-
-              <div class="item message-container-theme item-icon-right">
+              <div ng-if="conversacion.user != ''" class="item message-container-theme item-icon-right">
                 <div ui-sref="mensajes.view" ng-click="viewConversation({{conversacion.id}})">
                   <h2>{{conversacion.user}}</h2>
                 </div>
