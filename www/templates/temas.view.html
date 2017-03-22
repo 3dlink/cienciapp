@@ -18,7 +18,7 @@
 			          	<div class="question">
 			          		<p>{{tema_info['Theme'].theme}}</p>
 			          		<div class="author">
-			          			<a ng-if="tema_info['Theme'].file != null && tema_info['Theme'].file != ''" ng-click="OpenLink('http://www.3dlinkweb.com/cienciapp/files/{{name_file}}')">Descargar Archivo Adjunto</a>
+			          			<a ng-if="tema_info['Theme'].file != null && tema_info['Theme'].file != ''" ng-click="OpenLink('http://www.3dlinkweb.com/cienciapp/files/{{name_file}}')">Descargar Archivo</a>
 			          			<span class="name">{{tema_info['User'].first_name}} {{tema_info['User'].last_name}}</span>
 			          			<span class="date">{{tema_info['Theme'].date.split('-')[2]}}/{{tema_info['Theme'].date.split('-')[1]}} {{tema_info['Theme'].hour.split(':')[0]}}:{{tema_info['Theme'].hour.split(':')[1]}}</span>
 			          		</div>
@@ -63,12 +63,12 @@
 								<!-- <div class="ion-paperclip paperclip-css" style="font-size: 230%; margin-top: 0%; margin-left: 26%; color: #fff;"></div> -->
 				      	<label class="fileContainer">
 				      		<i class="ion-paperclip paperclip-css"></i>
-									<input name="file" type="file" ng-model="file_name" onchange="angular.element(this).scope().uploadFile(this.files)">
+									<input id="file_input_id" name="file" type="file" ng-model="file_name" onchange="angular.element(this).scope().uploadFile(this.files)">
 								</label>
 			      	</div>
 			      	<div class="col" style="background-color: transparent; margin: auto 2%; border: 1px solid #000; border-radius: 8px;">
 			      		<input type="hidden" name="tema_id" ng-model="tema_info['Theme'].id" value="{{tema_info['Theme'].id}}">
-								<input type="text" style="width: 100%;" ng-model="tema_answer" placeholder="Escribe una respuesta...">
+								<input id="answer_input_id" type="text" style="width: 100%;" ng-model="tema_answer" placeholder="Escribe una respuesta...">
 			      	</div>
 			      	<div class="col col-10" style="border-radius: 10px; background-color: #33cd5f;" ng-click="crearRespuesta(tema_answer)">
 			      		<div class="ion-chevron-up" style="font-size: 170%; margin-top: 16%; margin-left: 5%; color: #fff;"></div>

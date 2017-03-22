@@ -19,10 +19,6 @@
 					</div>
 
 	        <div class="welcome item item-divider" style="margin-bottom: 40px;">
-	          <!-- <h2>Id Aula: {{aula_id}}</h2> -->
-	          <!-- <h2 style="color: #ffffff">Id Usuario: {{datos_session.id}}</h2>
-	          <h2 style="color: #ffffff">Tipo usuario: {{user_group}}</h2>
-	          <h2 style="color: #ffffff">Grupo ID: {{grupo_id}}</h2> -->
 	          <div ng-if="!isLoadingThemes() && lista_temas_general.length != 0" ng-repeat="tema_general in lista_temas_general | filter: searchKeyword">
 
 							<div class="item group-container-theme item-icon-right" ng-class="{'theme-solved' : tema_general['Theme'].solved || make_theme_general_solved.id_theme == tema_general['Theme'].id}">
@@ -40,10 +36,6 @@
 			        </div>
 
 	          </div>
-
-		        <div class="item-text-wrap" ng-show="(estudiantesArray | filter:searchKeyword).length == 0" style="color: #ffffff;">
-		        	<strong>No se encontraron resultados...</strong>
-		        </div>
 
 	          <div class="item-text-wrap" ng-if="!isLoadingThemes() && (lista_temas_general | filter:searchKeyword).length == 0">
 	          	<strong>Disculpe, no existen temas en este foro por ahora...</strong>

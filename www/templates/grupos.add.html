@@ -1,6 +1,6 @@
 <ion-view>
-	<ion-content scroll="true" padding="false">
-	 	<div ui-view name="menuContent" class="ion-subject scroll">
+	<ion-content scroll="false" padding="false">
+	 	<div ui-view name="menuContent" class="ion-subject">
 
 			<div class="parent-div">
 				<div class="child-div textoCentrado">
@@ -8,7 +8,6 @@
 					<div class="list">
 						<div class="item ion-subject header-add-edit">
 							<h1 class="titulo-diego">Nuevo Grupo</h1>
-							<!-- <strong>Id Aula: {{aula_id}}</strong> -->
 						</div>
 		        
 						<div class="item ion-subject" style="border-color: transparent;" ng-controller="GruposCtrl">
@@ -24,20 +23,15 @@
 							</button>
 						</div>
 
-						<div ng-if="!isLoadingStudents()" ng-repeat="estudiante in estudiantesArray" class="beta">
-							<ion-checkbox class="list-students-checkbox" ng-model="estudiante.checked" ng-checked="estudiante.checked" ng-value="{{estudiante.id}}">
-							  {{estudiante.first}} {{estudiante.last}}
-							</ion-checkbox>
+						<div class="students-content" style="height:{{iframeHeight}}px">
+							<div ng-if="!isLoadingStudents()" ng-repeat="estudiante in estudiantesArray" class="beta">
+								<ion-checkbox class="list-students-checkbox" ng-model="estudiante.checked" ng-checked="estudiante.checked" ng-value="{{estudiante.id}}">
+								  {{estudiante.first}} {{estudiante.last}}
+								</ion-checkbox>
+							</div>
 						</div>
-
 						<div ng-hide="!isLoadingStudents()" students="isLoadingStudents()"></div>			
 					</div>
-
-					<!-- <div class="container" style="color: #ffffff; background-color: #000000;">
-				    <pre>
-				      {{ estudiantesArray }}
-				    </pre>
-				  </div> -->
 
 		    </div>
 			</div>

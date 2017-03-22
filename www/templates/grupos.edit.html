@@ -30,10 +30,12 @@
 
 						<div ng-hide="!isLoadingGroup()" group="isLoadingGroup()"></div>
 
-						<div ng-if="!isLoadingStudents()" ng-repeat="estudiante in estudiantesArray | orderBy : 'checked'" class="beta">
-							<ion-checkbox class="list-students-checkbox" ng-model="estudiante.checked" ng-checked="estudiante.checked" ng-value="{{estudiante.id}}">
-							  {{estudiante.first}} {{estudiante.last}}
-							</ion-checkbox>
+						<div class="students-content" style="height:{{iframeHeight}}px">
+							<div ng-if="!isLoadingStudents()" ng-repeat="estudiante in estudiantesArray | orderBy : 'checked'" class="beta">
+								<ion-checkbox class="list-students-checkbox" ng-model="estudiante.checked" ng-checked="estudiante.checked" ng-value="{{estudiante.id}}">
+								  {{estudiante.first}} {{estudiante.last}}
+								</ion-checkbox>
+							</div>
 						</div>
 
 						<div ng-hide="!isLoadingStudents()" students="isLoadingStudents()"></div>

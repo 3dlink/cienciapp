@@ -20,7 +20,7 @@
 		          		<p>{{tema_info_general['Theme'].theme}}</p>
 		          		{{}}
 		          		<div class="author">
-		          			<a ng-if="tema_info_general['Theme'].file != null && tema_info_general['Theme'].file != ''" ng-click="viewPdf('http://www.3dlinkweb.com/cienciapp/files/{{name_file}}')">Descargar Archivo Adjunto</a>
+		          			<a ng-if="tema_info_general['Theme'].file != null && tema_info_general['Theme'].file != ''" ng-click="viewPdf('http://www.3dlinkweb.com/cienciapp/files/{{name_file}}')">Descargar Archivo</a>
 		          			<span class="name">{{tema_info_general['User'].first_name}} {{tema_info_general['User'].last_name}}</span>
 		          			<span class="date">{{tema_info_general['Theme'].date.split('-')[2]}}/{{tema_info_general['Theme'].date.split('-')[1]}} {{tema_info_general['Theme'].hour.split(':')[0]}}:{{tema_info_general['Theme'].hour.split(':')[1]}}</span>
 		          		</div>
@@ -57,30 +57,50 @@
 				</div>
 
 			</div>
-
+<!-- 
 			  <ion-footer-bar class="ion-footer-theme">
 			    <div style="width: 100%;" ng-controller="GeneralCtrl">
 
 
 			      <div class="row">
 			      	<div class="col col-10" style="border-radius: 10px; background-color: #807b7b;">
-								<!-- <div class="ion-paperclip paperclip-css"></div> -->
 				      	<label class="fileContainer">
 				      		<i class="ion-paperclip paperclip-css"></i>
-									<input name="file" type="file" ng-model="file_name" onchange="angular.element(this).scope().uploadFile(this.files)">
+									<input id="file_input_id_gral" name="file" type="file" ng-model="file_name_gral" onchange="angular.element(this).scope().uploadFile(this.files)">
 								</label>
 			      	</div>
 			      	<div class="col" style="background-color: transparent; margin: auto 2%; border: 1px solid #000; border-radius: 8px;">
 			      		<input type="hidden" name="tema_id" ng-model="tema_info_general['Theme'].id" value="{{tema_info_general['Theme'].id}}">
-								<input type="text" style="width: 100%;" ng-model="tema_answer" placeholder="Escribe una respuesta...">
+								<input id="answer_input_id_gral" type="text" style="width: 100%;" ng-model="tema_answer" placeholder="Escribe una respuesta...">
 			      	</div>
-			      	<div class="col col-10" style="border-radius: 10px; background-color: #33cd5f;" ng-click="crearRespuestaGeneral()">
+			      	<div class="col col-10" style="border-radius: 10px; background-color: #33cd5f;" ng-click="crearRespuestaGeneral(tema_answer)">
 			      		<div class="ion-chevron-up chevron-up-css" ></div>
 			      	</div>
 			      </div>
 
 
 			    </div>
+			  </ion-footer-bar>
+
+			   -->
+
+			  <ion-footer-bar class="ion-footer-theme">
+			      <div class="row">
+			      	<div class="col col-10" style="border-radius: 10px; background-color: #807b7b;">
+								<!-- <div class="ion-paperclip paperclip-css" style="font-size: 230%; margin-top: 0%; margin-left: 26%; color: #fff;"></div> -->
+				      	<label class="fileContainer">
+				      		<i class="ion-paperclip paperclip-css"></i>
+									<input id="file_input_id_gral" name="file" type="file" ng-model="file_name" onchange="angular.element(this).scope().uploadFile(this.files)">
+								</label>
+			      	</div>
+			      	<div class="col" style="background-color: transparent; margin: auto 2%; border: 1px solid #000; border-radius: 8px;">
+			      		<input type="hidden" name="tema_id" ng-model="tema_info_general['Theme'].id" value="{{tema_info_general['Theme'].id}}">
+								<input id="answer_input_id_gral" type="text" style="width: 100%;" ng-model="tema_answer" placeholder="Escribe una respuesta...">
+			      	</div>
+			      	<div class="col col-10" style="border-radius: 10px; background-color: #33cd5f;" ng-click="crearRespuestaGeneral(tema_answer)">
+			      		<div class="ion-chevron-up" style="font-size: 170%; margin-top: 16%; margin-left: 5%; color: #fff;"></div>
+			      	</div>
+			      </div>
 			  </ion-footer-bar>
 		</div>
 </ion-view>

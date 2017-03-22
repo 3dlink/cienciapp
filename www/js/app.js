@@ -383,7 +383,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'ionic.service.core', 'ionic.se
   return {
     restrict: 'A',
     scope: {cond: '=students'},
-    template: '<p ng-if="isLoadingStudents()" style="margin-top: 0%; color: black;"><img src="img/ajax-loader.gif" width="20" height="20" /><b> CARGANDO ESTUDIANTES...</b></p>',
+    template: '<p ng-if="isLoadingStudents()" style="margin-top: 0%; color: #322e69;"><img src="img/ajax-loader.gif" width="20" height="20" /><b> CARGANDO ESTUDIANTES...</b></p>',
     link: function (scope) {
       scope.isLoadingStudents = function() {
         var ret = scope.cond === true || (
@@ -550,10 +550,10 @@ angular.module('starter', ['ionic', 'ngCordova', 'ionic.service.core', 'ionic.se
   };
 })
 
-.directive('mensajes', function () {
+.directive('mensajestodos', function () {
   return {
     restrict: 'A',
-    scope: {cond: '=mensajes'},
+    scope: {cond: '=mensajestodos'},
     template: '<p ng-if="isLoadingMessages()" style="margin-top: 0%; color: black;"><img src="img/ajax-loader.gif" width="20" height="20" /><b> CARGANDO MENSAJES...</b></p>',
     link: function (scope) {
       scope.isLoadingMessages = function() {
@@ -707,8 +707,16 @@ angular.module('starter', ['ionic', 'ngCordova', 'ionic.service.core', 'ionic.se
 })
 .controller('PerfilCtrl', function($scope, $cordovaCamera, $rootScope, $cordovaFileTransfer, $ionicModal, $jrCrop){
 
-  $rootScope.resultado = JSON.parse(sessionStorage["current_user"]); //Get from storage
-  $rootScope.resultado = JSON.parse(localStorage["current_user"]);
+
+    $scope.consultarPerfil = function () {
+      $rootScope.resultado = JSON.parse(sessionStorage["current_user"]); //Get from storage
+      $rootScope.resultado = JSON.parse(localStorage["current_user"]);
+      $rootScope.downloadProgress = -1;
+      if($rootScope.user_photo_change!=1){
+        $rootScope.user_photo = $rootScope.resultado.photo;
+      }
+    };
+
 
     $scope.choosePhotoFirst = function () {
 
@@ -736,12 +744,15 @@ angular.module('starter', ['ionic', 'ngCordova', 'ionic.service.core', 'ionic.se
 
           $cordovaFileTransfer.upload(url_server, imageData, options2).then(function (data) {
             alert("La imagen ha sido cargada correctamente!");
-
+            $('#progress').css('display', 'none');
             $rootScope.user_photo_change = 1;
-            $rootScope.user_photo = data;
+            $rootScope.user_photo = data['response'].substr(1,data['response'].length-2);;
           }, function (err) {
             console.log("ERROR: " + JSON.stringify(err));
+          }, function (progress) {
+            $rootScope.downloadProgress = (progress.loaded / progress.total) * 100;
           });
+
         }else{
           alert("Disculpe, ocurrió un error al cargar la imagen 1");
         }
@@ -951,6 +962,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'ionic.service.core', 'ionic.se
   //Get from storage
   $rootScope.datos_session = JSON.parse(sessionStorage["current_user"]);
   $rootScope.datos_session = JSON.parse(localStorage["current_user"]);
+  $scope.iframeHeight = window.innerHeight-300;
 
   // get the aula_id and user_group_id
   $rootScope.aula_id = $stateParams.aulaID;
@@ -1337,10 +1349,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'ionic.service.core', 'ionic.se
 
       if(data[0] === undefined){
         alert("ERROR: " + data);
-        //$rootScope.resultado = data;
       }else{
-        // console.log(data);
-        // var tiempo = $rootScope.AssignedDate.now();
         $scope.listarTemasGeneral();
         $location.path('/app/general/'+$stateParams.aulaID);
       }
@@ -1365,7 +1374,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'ionic.service.core', 'ionic.se
         console.log("ERROR TEMA: " + data);
         //$rootScope.resultado = data;
       }else{
-        // console.log(data);
+        $('#file_input_id_gral').val('');
         $rootScope.count_answers_theme_general = {
           id_theme: data['Theme'].id,
           total: data['Answer'].length
@@ -1472,43 +1481,36 @@ angular.module('starter', ['ionic', 'ngCordova', 'ionic.service.core', 'ionic.se
     });
   };
 
-  $scope.crearRespuestaGeneral = function() {
+    $scope.crearRespuestaGeneral = function(tema_answer) {
 
-    var datos_answer = {
-      theme_id: $scope.tema_info_general['Theme'].id,
-      answer: $scope.tema_answer,
-      file: $scope.file_name,
-      user_id: $rootScope.datos_session.id
-    };
+    if(tema_answer != undefined){
+      var datos_answer_group = {
+        theme_id: $scope.tema_info_general['Theme'].id,
+        file: $scope.file_name,
+        user_id: $rootScope.datos_session.id,
+        answer: tema_answer
+      };
 
-    var request = $http({
-      method : "post",
-      url : "http://www.3dlinkweb.com/cienciapp/answers/add",
-      data : datos_answer
-    });
+      var request = $http({
+        method : "post",
+        url : "http://www.3dlinkweb.com/cienciapp/answers/add",
+        data : datos_answer_group
+      });
 
-    request.success(function(data){
+      request.success(function(data){
 
-      if(data[0] === undefined){
-        alert("ERROR: " + data);
-        //$rootScope.resultado = data;
-      }else{
-        // console.log(data);
-        $scope.tema_answer = '';
-        // $rootScope.answers_output.push(datos_answer);
-        $scope.consultarTemaGeneral(datos_answer.theme_id);
-        
-        $scope.file_name = '';
-        // $rootScope.answers_output = [];
-        // angular.forEach(data, function(value, key) {
-        //   // console.log(value['Theme']);
-        //   output.push(value['Theme']);
-        // });
-
-        // $scope.listarTemas();
-        // $location.path('/app/temas/'+$stateParams.grupoID);
-      }
-    });
+        if(data[0] === undefined){
+          alert("ERROR: " + data);
+        }else{
+          $('#file_input_id_gral').val('');
+          $('#answer_input_id_gral').val('');
+          // $scope.tema_answer = '';
+          $scope.tema_answer = '';
+          $scope.file_name = '';
+          $scope.consultarTemaGeneral(datos_answer_group.theme_id);
+        }
+      });
+    }
   };
 
   $scope.respuestaCorrectaGeneral = function(idRespuesta, idTema) {
@@ -1777,29 +1779,33 @@ angular.module('starter', ['ionic', 'ngCordova', 'ionic.service.core', 'ionic.se
 
   $scope.crearRespuesta = function(tema_answer) {
 
-    var datos_answer_group = {
-      theme_id: $scope.tema_info['Theme'].id,
-      file: $scope.file_name,
-      user_id: $rootScope.datos_session.id,
-      answer: tema_answer
-    };
+    if(tema_answer != undefined){
+      var datos_answer_group = {
+        theme_id: $scope.tema_info['Theme'].id,
+        file: $scope.file_name,
+        user_id: $rootScope.datos_session.id,
+        answer: tema_answer
+      };
 
-    var request = $http({
-      method : "post",
-      url : "http://www.3dlinkweb.com/cienciapp/answers/add",
-      data : datos_answer_group
-    });
+      var request = $http({
+        method : "post",
+        url : "http://www.3dlinkweb.com/cienciapp/answers/add",
+        data : datos_answer_group
+      });
 
-    request.success(function(data){
+      request.success(function(data){
 
-      if(data[0] === undefined){
-        alert("ERROR: " + data);
-      }else{
-        $scope.tema_answer_group = '';
-        $scope.consultarTema(datos_answer_group.theme_id);
-        $scope.file_name = '';
-      }
-    });
+        if(data[0] === undefined){
+          alert("ERROR: " + data);
+        }else{
+          $('#file_input_id').val('');
+          $('#answer_input_id').val('');
+          // $scope.tema_answer = '';
+          $scope.consultarTema(datos_answer_group.theme_id);
+          // $scope.file_name = '';
+        }
+      });
+    }
   };
 
   $scope.respuestaCorrecta = function(idRespuesta, idTema) {
@@ -2252,17 +2258,6 @@ angular.module('starter', ['ionic', 'ngCordova', 'ionic.service.core', 'ionic.se
       });
     };
 
-    // $scope.$watch('aulas', function(newVal) {
-    //   if (newVal){
-    //      console.log("EL ID DE AULA SELECCIONADO: "+newVal.id);
-    //     console.log("User group: "+$rootScope.datos_session.user_group_id);
-    //     if ($rootScope.datos_session.user_group_id == 2) {
-    //       $scope.consultarEstudiantes(newVal.id);
-    //     } else {
-    //       $scope.consultarDestinatarios(newVal.id);
-    //     }
-    //   }
-    // });
 
     $scope.consultarEstudiantes = function (aulaID) { //no trae al profesor
 
@@ -2329,23 +2324,26 @@ angular.module('starter', ['ionic', 'ngCordova', 'ionic.service.core', 'ionic.se
 
   $scope.crearMensaje = function(reciver,message) {
 
-    var datos_mensaje = {
-      sender_id: $rootScope.datos_session.id,
-      reciver_id: reciver,
-      message: message,
-    };
+    if((reciver != undefined) && (message != undefined)){
 
-    var request = $http({
-        method : "post",
-        url : "http://www.3dlinkweb.com/cienciapp/messages/new_message",
-        data : datos_mensaje
-      });
+      var datos_mensaje = {
+        sender_id: $rootScope.datos_session.id,
+        reciver_id: reciver,
+        message: message,
+      };
 
-      request.success(function(data){
-        $scope.allConversations();
-        // $scope.closeModalDelete();
-        $location.path('/app/mensajes');
-      });
+      var request = $http({
+          method : "post",
+          url : "http://www.3dlinkweb.com/cienciapp/messages/new_message",
+          data : datos_mensaje
+        });
+
+        request.success(function(data){
+          $scope.allConversations();
+          // $scope.closeModalDelete();
+          $location.path('/app/mensajes');
+        });
+      }
   };
 
   $scope.allConversations = function () {
@@ -2360,7 +2358,6 @@ angular.module('starter', ['ionic', 'ngCordova', 'ionic.service.core', 'ionic.se
     });
 
     request.success(function(data){
-      console.log(data);
       $rootScope.conversations = data;
     });
   };
@@ -2411,28 +2408,31 @@ angular.module('starter', ['ionic', 'ngCordova', 'ionic.service.core', 'ionic.se
 
   $scope.responderMensaje = function(other, idConversation){
 
-    var datam = {
-      sender_id: $rootScope.datos_session.id,
-      reciver_id: other,
-      message:  $scope.message_response,
-    };
+    if($scope.message_response != undefined){
 
-    var request = $http({
-      method : "post",
-      url : "http://www.3dlinkweb.com/cienciapp/messages/new_message",
-      data : datam
-    });
+      var datam = {
+        sender_id: $rootScope.datos_session.id,
+        reciver_id: other,
+        message:  $scope.message_response,
+      };
 
-    request.success(function(data){
-      $rootScope.conversacion = data;
+      var request = $http({
+        method : "post",
+        url : "http://www.3dlinkweb.com/cienciapp/messages/new_message",
+        data : datam
+      });
 
-       if(!data){
-        alert("ERROR: " + data);
-        }else{
-          $scope.message_response = '';
-          $scope.viewConversation(idConversation);
-        }
-    });
+      request.success(function(data){
+        $rootScope.conversacion = data;
+
+         if(!data){
+          alert("ERROR: " + data);
+          }else{
+            $scope.message_response = '';
+            $scope.viewConversation(idConversation);
+          }
+      });
+    }
   };
 
 

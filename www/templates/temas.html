@@ -28,8 +28,8 @@
 									  <div class="col col-50">{{count_answers_theme.id_theme === tema_grupo['Theme'].id ? count_answers_theme.total : tema_grupo['Answer'].length}} respuesta(s)</div>
 									</div>
 			        	</div>
-				          <i ng-if="datos_session.id == tema_general['User'].id || user_group == 2" class="icon ion-trash-a" on-delete-theme="itemOnDeleteTheme(tema_grupo['Theme'].id)"></i>
-						      <i ng-if="datos_session.id == tema_general['User'].id || user_group == 2" class="icon ion-edit" ui-sref="temas.edit({ temaID: tema_grupo['Theme'].id })" ng-click="consultarTema({{tema_grupo['Theme'].id}})"></i>
+				          <i ng-if="datos_session.id == tema_grupo['User'].id || user_group == 2" class="icon ion-trash-a" on-delete-theme="itemOnDeleteTheme(tema_grupo['Theme'].id)"></i>
+						      <i ng-if="datos_session.id == tema_grupo['User'].id || user_group == 2" class="icon ion-edit" ui-sref="temas.edit({ temaID: tema_grupo['Theme'].id })" ng-click="consultarTema({{tema_grupo['Theme'].id}})"></i>
 			        </div>
 	          </div>
 
@@ -38,41 +38,6 @@
 		        </div>
 
 	          <div ng-hide="!isLoadingThemes()" themes="isLoadingThemes()"></div>
-
-	          <!-- <div ng-if="!isLoadingGroups()" ng-repeat="grupo in listado_grupos">
-
-	          	<div ng-if="user_group == 2">
-				        <div class="item item-text-wrap group-container item-icon-right" ng-if="listado_grupos.length > 0">
-				          {{grupo.name}}
-				          <i class="icon ion-trash-a" on-delete-group="itemOnDeleteGroup(grupo.id)"></i>
-				          <i class="icon ion-edit" ui-sref="grupos.edit({ grupoID: grupo.id })" ng-click="listadoEstudiantes(aula_id); consultarGrupo(grupo.id)"></i>
-				          <hr />
-				          {{grupo.integrantes}} integrante(s)
-				        </div>
-
-				        <div class="item item-text-wrap welcome" ng-if="listado_grupos.length == 0">
-				        	<strong>No posee grupos por ahora.</strong>
-				        </div>
-	          	</div>
-
-	          	<div ng-if="user_group == 3">
-				        <div class="item item-text-wrap group-container-student" ng-if="listado_grupos.length > 0" ui-sref="temas({ grupoID: grupo.id })" ng-click="detalleGrupo()">
-				          {{grupo.name}}
-				        </div>
-
-				        <div class="item item-text-wrap welcome" ng-if="listado_grupos.length == 0">
-				        	<strong>Disculpe, ustéd no está asociado a algún grupo por ahora.</strong>
-				        </div>
-	          	</div>
-	          </div>
-
-		        <div ng-hide="!isLoadingGroups()" groups="isLoadingGroups()"></div> -->
-
-				    <!-- <div class="container">
-				      <pre>
-				        {{ make_theme_solved | json }}
-				      </pre>
-				    </div> -->
 	        </div>
 			    
 		    </div>

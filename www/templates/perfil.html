@@ -12,6 +12,21 @@
 		background-size: cover;
 	}
 
+	.progress{
+		width: 80%;
+		height: 15px;
+		border-radius: 10px;
+		margin-bottom: 20px;
+		border:solid 1px black;
+	}
+
+	.progress-in{
+		float: left;
+		height: 13px;
+		border-radius: 10px;
+		background: green;
+	}
+
 </style>
 
 <ion-view>
@@ -22,10 +37,11 @@
 				<div class="child-div profile-div item item-body">
 
 				   <div id="perfil_contenedor" class="child-div" >
+				   	<div id="progress" class="progress" ng-if="downloadProgress!=-1"> <div class="progress-in" style="width:{{downloadProgress}}%;"></div> </div>
 				  	<div>
-				  		<div ng-if="resultado.photo == null" class="add-profile" ng-click="choosePhotoFirst()" style="background-image:url('http://www.3dlinkweb.com/cienciapp/img/plus2.png');"></div>
-				  		<div ng-if="(resultado.photo != null) && user_photo_change!=1" class="add-profile" ng-click="choosePhotoFirst()" style="background-image:url('http://www.3dlinkweb.com/cienciapp/files/{{resultado.photo}}');"></div>
-				  		<div ng-if="(resultado.photo != null) && user_photo_change==1" class="add-profile" ng-click="choosePhotoFirst()" style="background-image:url('http://www.3dlinkweb.com/cienciapp/files/{{user_photo}}');"></div>
+				  		<div ng-if="user_photo == null" class="add-profile" ng-click="choosePhotoFirst()" style="background-image:url('http://www.3dlinkweb.com/cienciapp/img/plus2.png');"></div>
+				  		<div ng-if="user_photo != null" class="add-profile" ng-click="choosePhotoFirst()" style="background-image:url('http://www.3dlinkweb.com/cienciapp/files/{{user_photo}}');"></div>
+				  		<!-- <div ng-if="(user_photo != null) && user_photo_change==1" class="add-profile" ng-click="choosePhotoFirst()" style="background-image:url('http://www.3dlinkweb.com/cienciapp/files/{{user_photo}}');"></div> -->
 				  	</div>
 
 						<div class="child-div">
